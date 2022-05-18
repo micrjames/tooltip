@@ -1,0 +1,36 @@
+@mixin tooltip($font-size, $background-color, $text-color, $direction: 'up') {
+   position: relative;
+   &-text {
+	  font-size: $font-size;
+	  visibility: hidden;
+	  top: 120%;
+	  left: 50%;
+	  background-color: $background-color;
+	  color: $text-color;
+	  text-align: center;
+	  padding: 10px;
+	  white-space: nowrap;
+	  border-radius: 5px;
+	  position: absolute;
+	  z-index: 1;
+	  opacity: .5;
+	  transform: translateX(-50%);
+	  transition: opacity 1s;
+	  &::after {
+		 content: "";
+		 position: absolute;
+		 bottom: 100%;
+		 left: 50%;
+		 transform: translateX(-50%);
+		 border-width: 5px;
+		 border-style: solid;
+		 border-color: transparent transparent black transparent;
+	  }  
+   }
+   &:hover {
+	  .tooltip-text {
+		 visibility: visible;
+		 opacity: 1;
+	  } 
+   } 
+}
