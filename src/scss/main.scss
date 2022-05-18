@@ -17,5 +17,5 @@ body {
 }
 .tooltip {
    border-bottom: 1px dotted black;
-   @include tooltip(1rem, black, white);
+   @include tooltip(1rem, black, white, above, left);
 }

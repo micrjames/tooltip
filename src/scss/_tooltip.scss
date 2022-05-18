@@ -1,10 +1,17 @@
-@mixin tooltip($font-size, $background-color, $text-color, $direction: 'up') {
+@mixin tooltip($font-size, $background-color, $text-color, $direction: below, $justify: center) {
    position: relative;
    &-text {
 	  font-size: $font-size;
 	  visibility: hidden;
-	  top: 120%;
-	  left: 50%;
+	  @if $direction == below {
+		 top: 120%;
+		 left: 50%;
+		 transform: translateX(-50%);
+	  } @else if $direction == above {
+		 bottom: 100%;
+		 right: 50%;
+		 transform: translateX(50%);
+	  }
 	  background-color: $background-color;
 	  color: $text-color;
 	  text-align: center;
@@ -13,18 +20,40 @@
 	  border-radius: 5px;
 	  position: absolute;
 	  z-index: 1;
-	  opacity: .5;
-	  transform: translateX(-50%);
+	  opacity: 0;
 	  transition: opacity 1s;
 	  &::after {
 		 content: "";
 		 position: absolute;
-		 bottom: 100%;
-		 left: 50%;
-		 transform: translateX(-50%);
+		 @if $direction == below {
+			bottom: 100%;
+			border-color: transparent transparent $background-color transparent;
+			@if $justify == center {
+			   left: 50%;
+			   transform: translateX(-50%);
+			} @else if $justify == left {
+			   left: 25%;
+			   transform: translateX(-25%);
+			} @else if $justify == right {
+			   left: 75%;
+			   transform: translateX(-75%);
+			}
+		 } @else if $direction == above {
+			top: 100%;
+			border-color: $background-color transparent transparent transparent;
+			@if $justify == center {
+			   right: 50%;
+			   transform: translateX(50%);
+			} @else if $justify == left {
+			   right: 75%;
+			   transform: translateX(75%);
+			} @else if $justify == right {
+			   right: 25%;
+			   transform: translateX(25%);
+			}
+		 }
 		 border-width: 5px;
 		 border-style: solid;
-		 border-color: transparent transparent black transparent;
 	  }  
    }
    &:hover {
