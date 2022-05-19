@@ -14,8 +14,11 @@ body {
     display: flex;
 	justify-content: center;
 	align-items: center;
-}
-.tooltip {
-   border-bottom: 1px dotted black;
-   @include tooltip(1rem, black, white, above, left);
+	margin: 0 10vw;
+	flex-wrap: wrap;
+	.tooltip {
+		margin: 0 1.2rem;
+		border-bottom: 1px dotted black;
+	    @include tooltip(1rem, black, white, below);
+	}
 }

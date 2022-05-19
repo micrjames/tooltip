@@ -1,15 +1,27 @@
-@mixin tooltip($font-size, $background-color, $text-color, $direction: below, $justify: center) {
+@mixin tooltip($font-size, $background-color, $text-color, $direction: below, $justify: center, $displacement: null) {
    position: relative;
    &-text {
 	  font-size: $font-size;
 	  visibility: hidden;
 	  @if $direction == below {
 		 top: 120%;
-		 left: 50%;
+		 @if $displacement == right {
+		    left: 100%;	
+		 } @else if $displacement == left {
+			right: 10%;	
+		 } @else {
+			left: 50%;
+		 }
 		 transform: translateX(-50%);
 	  } @else if $direction == above {
 		 bottom: 100%;
-		 right: 50%;
+		 @if $displacement == right {
+		    right: 0%;	
+		 } @else if $displacement == left {
+			right: 110%;	
+		 } @else {
+			right: 50%;
+		 }
 		 transform: translateX(50%);
 	  }
 	  background-color: $background-color;
@@ -35,8 +47,8 @@
 			   left: 25%;
 			   transform: translateX(-25%);
 			} @else if $justify == right {
-			   left: 75%;
-			   transform: translateX(-75%);
+			   left: 90%;
+			   transform: translateX(-90%);
 			}
 		 } @else if $direction == above {
 			top: 100%;
@@ -49,10 +61,10 @@
 			   transform: translateX(75%);
 			} @else if $justify == right {
 			   right: 25%;
-			   transform: translateX(25%);
+			   transform: translateX(75%);
 			}
 		 }
-		 border-width: 5px;
+		 border-width: 10px;
 		 border-style: solid;
 	  }  
    }
